@@ -115,6 +115,25 @@ fatherinlaw(FatherIL, ChildIL) :-
     father(FatherIL, Spouse),
     married(ChildIL, Spouse).
 
+motherinlaw(MotherIL, ChildIL) :-
+    mother(MotherIL, Spouse),
+    married(ChildIL, Spouse).
+
+
+parent(Parent, Child) :-
+    mother(Parent, Child);
+    father(Parent, Child).
+
+son(Son, Parent) :-
+    parent(Parent, Son),
+    man(Son).
+
+daughter(Daughter, Parent) :-
+    parent(Parent, Daughter),
+    woman(Daughter).
+
+
+
 
 
 
