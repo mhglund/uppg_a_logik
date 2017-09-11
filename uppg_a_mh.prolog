@@ -13,6 +13,7 @@ man(prins-daniel).
 man(prins-oscar).
 man(prins-carl-philip).
 man(prins-alexander).
+man(prins-gabriel). %% Ny prins!
 man(christopher-o-neill).
 man(prins-nicolas).
 
@@ -76,6 +77,7 @@ father(carl-xvi-gustaf, prins-carl-philip).
 father(prins-daniel, prinsessan-estelle).
 father(prins-daniel, prins-oscar).
 father(prins-carl-philip, prins-alexander).
+father(prins-carl-philip, prins-gabriel). %% Ny prins!
 father(christopher-o-neill, prinsessan-leonore).
 father(christopher-o-neill, prins-nicolas).
 
@@ -95,6 +97,7 @@ mother(silvia-f-sommerlath, prins-carl-philip).
 mother(kronprinsessan-victoria, prinsessan-estelle).
 mother(kronprinsessan-victoria, prins-oscar).
 mother(prinsessan-sofia, prins-alexander).
+mother(prinsessan-sofia, prins-gabriel). %% Ny prins!
 mother(prinsessan-madeleine, prinsessan-leonore).
 mother(prinsessan-madeleine, prins-nicolas).
 
@@ -132,6 +135,14 @@ daughter(Daughter, Parent) :-
     parent(Parent, Daughter),
     woman(Daughter).
 
+
+grandmother(Grandmother, Grandchild) :-
+    parent(Parent, Grandchild),
+    mother(Grandmother, Parent).
+
+grandfather(Grandfather, Grandchild) :-
+    parent(Parent, Grandchild),
+    father(Grandfather, Parent).
 
 
 
