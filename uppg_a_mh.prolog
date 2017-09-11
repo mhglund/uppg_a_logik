@@ -100,6 +100,18 @@ mother(prinsessan-madeleine, prins-nicolas).
 
 %% BEGIN CODE
 
+married(Husband, Wife) :-
+    husbandwife(Husband, Wife).
+
+married(Wife, Husband) :-
+    husbandwife(Husband, Wife).
+
+husbandwife(Husband, Wife) :-
+    husband(Husband, Wife),
+    wife(Wife, Husband).
+    
+
+
 
 
 %% END CODE
