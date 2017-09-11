@@ -111,6 +111,10 @@ husbandwife(Husband, Wife) :-
     wife(Wife, Husband).
     
 
+fatherinlaw(FatherIL, ChildIL) :-
+    father(FatherIL, Spouse),
+    married(ChildIL, Spouse).
+
 
 
 
