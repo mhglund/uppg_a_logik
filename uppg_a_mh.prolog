@@ -144,8 +144,35 @@ grandfather(Grandfather, Grandchild) :-
     parent(Parent, Grandchild),
     father(Grandfather, Parent).
 
+sibling(Sibling1, Sibling2) :- %% hjälpregel
+    parent(Parent, Sibling1),
+    parent(Parent, Sibling2),
+    Sibling1 \= Sibling2.
 
 
+brother(Brother, Sibling) :-
+    sibling(Brother, Sibling),
+    man(Brother). 
+
+sister(Sister, Sibling) :-
+    sibling(Sister, Sibling),
+    woman(Sister).
+
+
+%% uncle(Uncle, Child) :-
+  %%  parent(Parent, Child),
+    
+  %%  brother(Uncle, Parent);
+    %%sister(Sister, Parent),
+  %%  married(Sister, Uncle).
+
+
+brotherinlaw(BrotherIL, X) :-
+    married(Sibling, X),
+    brother(BrotherIL, Sibling);
+    sibling(X, Sibling2),
+    married(Sibling2, BrotherIL),
+    man(BrotherIL).
 
 
 %% END CODE
