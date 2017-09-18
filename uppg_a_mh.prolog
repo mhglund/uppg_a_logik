@@ -159,12 +159,20 @@ sister(Sister, Sibling) :-
     woman(Sister).
 
 
-%% uncle(Uncle, Child) :-
-  %%  parent(Parent, Child),
-    
-  %%  brother(Uncle, Parent);
-    %%sister(Sister, Parent),
-  %%  married(Sister, Uncle).
+uncle(Uncle, Child) :-
+    man(Uncle),
+    parent(Parent, Child),
+    (brother(Uncle, Parent);
+    sibling(Sibling, Parent),
+    married(Uncle, Sibling)).
+
+aunt(Aunt, Child) :-
+    woman(Aunt),
+    parent(Parent, Child),
+    (sister(Aunt, Parent);
+    brother(Brother, Parent),
+    married(Aunt, Brother)).
+  
 
 
 brotherinlaw(BrotherIL, X) :-
@@ -174,6 +182,12 @@ brotherinlaw(BrotherIL, X) :-
     married(Sibling2, BrotherIL),
     man(BrotherIL).
 
+sisterinlaw(SisterIL, X) :-
+    (married(Sibling, X),
+    sister(SisterIL, Sibling));
+    (sibling(X, Sibling2),
+    married(Sibling2, SisterIL)),
+    woman(SisterIL).
 
 %% END CODE
 
