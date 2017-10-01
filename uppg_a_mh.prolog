@@ -172,8 +172,23 @@ aunt(Aunt, Child) :-
     (sister(Aunt, Parent);
     brother(Brother, Parent),
     married(Aunt, Brother)).
-  
 
+cousin(Cousin1, Cousin2) :-
+    parent(Parent2, Cousin2),
+    sibling(Parent1, Parent2),
+    parent(Parent1, Cousin1).
+
+nephew(Nephew, Person) :-
+    (sibling(Sibling, Person);
+     married(Spouse, Person),
+     sibling(Sibling, Spouse)),
+    son(Nephew, Sibling).
+
+niece(Niece, Person) :-
+    (sibling(Sibling, Person);
+     married(Spouse, Person),
+     sibling(Sibling, Spouse)),
+    daughter(Niece, Sibling).
 
 brotherinlaw(BrotherIL, X) :-
     married(Sibling, X),
@@ -188,6 +203,22 @@ sisterinlaw(SisterIL, X) :-
     (sibling(X, Sibling2),
     married(Sibling2, SisterIL)),
     woman(SisterIL).
+
+
+ancestor(Ancestor, Person) :-
+    parent(Ancestor, Parent),
+     ancestor(Parent, Person);
+    parent(Ancestor, Person).
+
+
+ancestor(Ancestor, Person, N) :-
+    parent(Ancestor, Parent),
+    N1 is N-1,
+    N1 > 0,
+    ancestor(Parent, Person, N1);
+    parent(Ancestor, Person).
+
+
 
 %% END CODE
 
