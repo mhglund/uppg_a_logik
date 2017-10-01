@@ -13,7 +13,7 @@ man(prins-daniel).
 man(prins-oscar).
 man(prins-carl-philip).
 man(prins-alexander).
-man(prins-gabriel). %% Ny prins!
+%%man(prins-gabriel). %% Ny prins!
 man(christopher-o-neill).
 man(prins-nicolas).
 
@@ -77,7 +77,7 @@ father(carl-xvi-gustaf, prins-carl-philip).
 father(prins-daniel, prinsessan-estelle).
 father(prins-daniel, prins-oscar).
 father(prins-carl-philip, prins-alexander).
-father(prins-carl-philip, prins-gabriel). %% Ny prins!
+%%father(prins-carl-philip, prins-gabriel). %% Ny prins!
 father(christopher-o-neill, prinsessan-leonore).
 father(christopher-o-neill, prins-nicolas).
 
@@ -97,7 +97,7 @@ mother(silvia-f-sommerlath, prins-carl-philip).
 mother(kronprinsessan-victoria, prinsessan-estelle).
 mother(kronprinsessan-victoria, prins-oscar).
 mother(prinsessan-sofia, prins-alexander).
-mother(prinsessan-sofia, prins-gabriel). %% Ny prins!
+%%mother(prinsessan-sofia, prins-gabriel). %% Ny prins!
 mother(prinsessan-madeleine, prinsessan-leonore).
 mother(prinsessan-madeleine, prins-nicolas).
 
@@ -109,16 +109,16 @@ married(Husband, Wife) :-
 married(Wife, Husband) :-
     husbandwife(Husband, Wife).
 
-husbandwife(Husband, Wife) :-
+husbandwife(Husband, Wife) :- %hjälpregel
     husband(Husband, Wife),
     wife(Wife, Husband).
     
 
-fatherinlaw(FatherIL, ChildIL) :-
+father_in_law(FatherIL, ChildIL) :-
     father(FatherIL, Spouse),
     married(ChildIL, Spouse).
 
-motherinlaw(MotherIL, ChildIL) :-
+mother_in_law(MotherIL, ChildIL) :-
     mother(MotherIL, Spouse),
     married(ChildIL, Spouse).
 
@@ -190,18 +190,26 @@ niece(Niece, Person) :-
      sibling(Sibling, Spouse)),
     daughter(Niece, Sibling).
 
-brotherinlaw(BrotherIL, X) :-
+brother_in_law(BrotherIL, X) :-
     married(Sibling, X),
     brother(BrotherIL, Sibling);
     sibling(X, Sibling2),
     married(Sibling2, BrotherIL),
+    man(BrotherIL);
+    married(Sibling, X),
+    sibling(Sibling, Sibling2),
+    married(Sibling2, BrotherIL),
     man(BrotherIL).
 
-sisterinlaw(SisterIL, X) :-
+sister_in_law(SisterIL, X) :-
     (married(Sibling, X),
     sister(SisterIL, Sibling));
     (sibling(X, Sibling2),
     married(Sibling2, SisterIL)),
+    woman(SisterIL);
+    married(Sibling, X),
+    sibling(Sibling, Sibling2),
+    married(Sibling2, SisterIL),
     woman(SisterIL).
 
 
